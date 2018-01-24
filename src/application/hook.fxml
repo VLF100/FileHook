@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="248.0" minWidth="600.0" prefHeight="248.0" prefWidth="600.0" styleClass="pane" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.151" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button defaultButton="true" layoutX="215.0" layoutY="152.0" mnemonicParsing="false" onMouseClicked="#hookClick" prefHeight="82.0" prefWidth="170.0" stylesheets="@application.css" text="Next line">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Label layoutX="21.0" layoutY="33.0" styleClass="labelinfo" stylesheets="@application.css" text="File:" textFill="WHITE">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
+      <Label layoutX="21.0" layoutY="91.0" styleClass="labelinfo" stylesheets="@application.css" text="Line:" textFill="WHITE">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label id="lineLabel" layoutX="167.0" layoutY="91.0" prefHeight="35.0" prefWidth="415.0" styleClass="labeldata" stylesheets="@application.css">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label id="fileName" layoutX="79.0" layoutY="33.0" prefHeight="35.0" prefWidth="363.0" styleClass="labeldata" stylesheets="@application.css">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Button layoutX="460.0" layoutY="31.0" mnemonicParsing="false" onMouseClicked="#selectClick" text="Select Script">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <TextField id="numberlabel" layoutX="79.0" layoutY="91.0" onKeyPressed="#inputNumber" prefHeight="35.0" prefWidth="81.0" styleClass="labeldata" stylesheets="@application.css">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+   </children>
+</AnchorPane>

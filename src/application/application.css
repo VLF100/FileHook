@@ -1,0 +1,19 @@
+.pane {
+	-fx-background-color: rgb(26, 26, 26);
+}
+
+.labeldata {
+	-fx-background-color: rgb(208, 206, 206);
+	-fx-border-radius: 10 10 5 5; 
+	-fx-background-radius: 10 10 5 5; 
+	-fx-padding: 0 0 0 10;
+}
+
+#numberlabel {
+	-fx-padding: 0 0 0 0;
+	-fx-border-style: solid;
+    -fx-border-width: 3px;
+	-fx-border-color: rgb(255, 255, 140);
+	-fx-alignment: center;
+}
+
