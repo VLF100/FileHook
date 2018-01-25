@@ -6,7 +6,6 @@ import java.awt.datatransfer.StringSelection;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
@@ -24,8 +23,8 @@ public class FileReader {
 		this.lineNumber = 0;
 		try {
 			this.fstream = new FileInputStream(this.file);
-			this.br = new BufferedReader(new InputStreamReader(this.fstream));
-		} catch (FileNotFoundException e) {
+			this.br = new BufferedReader(new InputStreamReader(this.fstream,"UTF8"));
+		} catch (Exception e) {
 			System.err.println("An error occurred starting the file. Please restart and try again.");
 		}
 		
@@ -69,13 +68,12 @@ public class FileReader {
 	}
 
 	public void goTo(int numberLine) {
-		String strLine = null;
 		int lineCounter = 0;
 		try {
 			this.close();
 			this.fstream = new FileInputStream(this.file);
-			this.br = new BufferedReader(new InputStreamReader(this.fstream));
-			while (lineCounter++ < numberLine-1 && (strLine = this.br.readLine()) != null);
+			this.br = new BufferedReader(new InputStreamReader(this.fstream,"UTF8"));
+			while (lineCounter++ < numberLine-1 && this.br.readLine() != null);
 			this.lineNumber = numberLine-1;
 			this.readLine();
 		} catch (IOException e) {
@@ -86,6 +84,4 @@ public class FileReader {
 	}
 	
 }
-
-//TODO Remove blanks and tabs at start of line
 

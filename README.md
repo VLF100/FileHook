@@ -1,7 +1,7 @@
 # FileHook
 A simple Java application for hooking lines of text from a file and copying them directly to the clipboard
 
-Dependencies needed to compile:
+Dependencies needed to compile: JavaFX
 
 Basic use:
  * Press [Select Script] to select the source file. The name of the file will be shown, as well as the line number 0.
