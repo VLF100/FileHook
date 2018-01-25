@@ -43,7 +43,6 @@ public class Main extends Application {
 	public static void showFileName(String name){
 		Node fileNameLabel = root.lookup("#fileName");
 		((Label)fileNameLabel).setText(name);
-		
 	}
 
 	public static void setLine(int i, String string) {
@@ -51,5 +50,10 @@ public class Main extends Application {
 		((TextField)numberField).setText(Integer.toString(i));
 		Node lineLabel = root.lookup("#lineLabel");
 		((Label)lineLabel).setText(string);
+	}
+
+	public static int getNumberLine() {
+		Node numberField = root.lookup("#numberlabel");
+		return new Integer(((TextField)numberField).getText());
 	}
 }

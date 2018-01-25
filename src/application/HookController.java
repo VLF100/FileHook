@@ -21,7 +21,8 @@ public class HookController {
 	
     @FXML
     void hookClick(MouseEvent event) {
-    	System.out.println("algo"); 
+    	if(fileReader!=null)
+    		fileReader.readLine();
     }
     
     @FXML
@@ -30,6 +31,8 @@ public class HookController {
     	fileChooser.setTitle("Open Script File");
     	File file = fileChooser.showOpenDialog(HookController.window);
         if (file != null) {
+        	if(fileReader!=null)
+        		fileReader.close();
         	HookController.fileReader = new FileReader(file);
         }
     }
@@ -37,7 +40,11 @@ public class HookController {
     @FXML
     void inputNumber(KeyEvent event) {
     	if(event.getCode() == KeyCode.ENTER)
-    		System.out.println("algo");
+    		if(fileReader!=null){
+    			int line = Main.getNumberLine();
+    			if(line > 0)
+    				fileReader.goTo(line);
+    		}
     }
     
 }
