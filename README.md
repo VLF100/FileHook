@@ -12,5 +12,6 @@ Basic use:
  
 Features yet to be implemented:
 	* Recent and Save features
+	* Update name of the program and icon
 	* Nothing more planned for now
 	
