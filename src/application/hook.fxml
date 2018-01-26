@@ -32,7 +32,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Button layoutX="460.0" layoutY="31.0" mnemonicParsing="false" onMouseClicked="#selectClick" text="Select Script">
+      <Button id="selectButton" layoutX="450.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#selectClick" prefHeight="25.0" prefWidth="122.0" styleClass="fileButton" stylesheets="@application.css" text="Select Script">
          <font>
             <Font size="18.0" />
          </font>
@@ -42,5 +42,12 @@
             <Font size="20.0" />
          </font>
       </TextField>
+      <Button id="saveButton" layoutX="65.0" layoutY="137.0" mnemonicParsing="false" onMouseClicked="#saveClick" prefHeight="30.0" prefWidth="109.0" stylesheets="@application.css" text="Save progress">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <AnchorPane id="recentPane" layoutX="342.0" prefHeight="248.0" prefWidth="260.0" styleClass="paneRecent" stylesheets="@application.css" visible="false" />
+      <Button id="recentButton" layoutX="450.0" layoutY="56.0" mnemonicParsing="false" onMouseClicked="#recentClick" prefHeight="17.0" prefWidth="122.0" styleClass="fileButton" stylesheets="@application.css" text="Recent" wrapText="true" />
    </children>
 </AnchorPane>

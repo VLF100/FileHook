@@ -83,5 +83,9 @@ public class FileReader {
 		
 	}
 	
+	public String[] getNameLine(){
+		return new String[] {Integer.toString(lineNumber),file.getAbsolutePath()};
+	}
+	
 }
 

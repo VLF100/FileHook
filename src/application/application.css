@@ -17,3 +17,13 @@
 	-fx-alignment: center;
 }
 
+.paneRecent {
+	-fx-border-style: solid;
+    -fx-border-width: 0 0 0 3;
+	-fx-border-color: rgb(255, 255, 140);
+}
+
+#recentButton {
+	-fx-border-radius: 5 5 10 10; 
+	-fx-background-radius: 5 5 10 10; 
+}

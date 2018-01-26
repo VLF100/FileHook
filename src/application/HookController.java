@@ -14,6 +14,7 @@ public class HookController {
 	
 	private static Window window;
 	private static FileReader fileReader;
+	private static RecentFiles recentFiles = null;
 	
 	public HookController(Window window){
 		HookController.window = window;
@@ -47,4 +48,24 @@ public class HookController {
     		}
     }
     
+    @FXML
+    void recentClick(MouseEvent event) {
+    	System.out.println("algo");
+    }
+    
+    @FXML
+    void saveClick(MouseEvent event) {
+    	if(recentFiles==null)
+    		recentFiles = RecentFiles.readRecent();
+    	if(recentFiles==null)
+    		recentFiles = new RecentFiles();
+    	if(fileReader!=null){
+    		String[] nameline = fileReader.getNameLine();
+    		recentFiles.saveFile(nameline[0],nameline[1]);
+    		//DEBUG
+    		System.out.println("alga");
+    	}
+    	//DEBUG
+    	System.out.println("no file to save");
+    }
 }

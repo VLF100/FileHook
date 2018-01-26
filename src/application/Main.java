@@ -54,6 +54,10 @@ public class Main extends Application {
 
 	public static int getNumberLine() {
 		Node numberField = root.lookup("#numberlabel");
-		return new Integer(((TextField)numberField).getText());
+		try {
+			return new Integer(((TextField)numberField).getText());
+		} catch (NumberFormatException e){
+			return -1;
+		}
 	}
 }
