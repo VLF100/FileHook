@@ -1,12 +1,15 @@
 package application;
 	
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 
@@ -17,6 +20,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
+			primaryStage.setTitle("FileHook");
 			HookController hook = new HookController(primaryStage);
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/application/hook.fxml"));
 	        fxmlLoader.setController(hook);
@@ -60,4 +64,35 @@ public class Main extends Application {
 			return -1;
 		}
 	}
+	
+	public static void showRecent(RecentFiles recentFiles) {
+		Node recentList = root.lookup("#recentList");
+		ListView<String> viewList = ((ListView<String>)recentList);
+		viewList.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+		    @Override
+		    public void handle(MouseEvent click) {
+
+		        if (click.getClickCount() == 2) {
+		           String currentItemSelected = viewList.getSelectionModel()
+		                                                    .getSelectedItem();
+		           HookController.openRecent(currentItemSelected);
+		        }
+		    }
+		});
+		if(viewList.getItems()!=null)
+			viewList.getItems().clear();
+		if(recentFiles!=null && recentFiles.getList()!=null)
+				for(String[] line_path: recentFiles.getList())
+					viewList.getItems().add(line_path[0]+" : "+line_path[1]);
+		Node recentPane = root.lookup("#paneRecent");
+		recentPane.setVisible(true);
+	}
+	
+	public static void closeRecent() {
+		Node recentPane = root.lookup("#paneRecent");
+		recentPane.setVisible(false);
+	}
+	
+	
 }

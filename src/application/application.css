@@ -17,7 +17,7 @@
 	-fx-alignment: center;
 }
 
-.paneRecent {
+#paneRecent {
 	-fx-border-style: solid;
     -fx-border-width: 0 0 0 3;
 	-fx-border-color: rgb(255, 255, 140);
@@ -26,4 +26,35 @@
 #recentButton {
 	-fx-border-radius: 5 5 10 10; 
 	-fx-background-radius: 5 5 10 10; 
+}
+
+#closeRecent {
+	-fx-background-image: url("./x.png");
+	-fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center; 
+	-fx-background-color: rgba(0, 0, 0, 0);
+}
+
+#closeRecent:hover  {
+	-fx-background-image: url("./xhover.png");
+	-fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center; 
+	-fx-background-color: rgba(0, 0, 0, 0);
+}
+
+#recentList {
+	-fx-background-insets: 0;
+	-fx-padding: 0;
+	-fx-border-style: solid;
+    -fx-border-width: 0 3 0 0;
+	-fx-border-color: rgb(255, 255, 140);
+}
+
+#labelRecent {
+	-fx-border-style: solid;
+    -fx-border-width: 0 3 3 0;
+	-fx-border-color: rgb(255, 255, 140);
+	
 }

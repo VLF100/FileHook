@@ -50,7 +50,8 @@ public class HookController {
     
     @FXML
     void recentClick(MouseEvent event) {
-    	System.out.println("algo");
+    	recentFiles = RecentFiles.readRecent();
+    	Main.showRecent(recentFiles);
     }
     
     @FXML
@@ -62,10 +63,25 @@ public class HookController {
     	if(fileReader!=null){
     		String[] nameline = fileReader.getNameLine();
     		recentFiles.saveFile(nameline[0],nameline[1]);
-    		//DEBUG
-    		System.out.println("alga");
     	}
-    	//DEBUG
-    	System.out.println("no file to save");
     }
+    
+
+    @FXML
+    void closeClick(MouseEvent event) {
+    	Main.closeRecent();
+    }
+    
+    public static void openRecent(String currentItemSelected) {
+    	String path = currentItemSelected.split(" : ")[1];
+    	File file = new File(path);
+        if (file != null) {
+        	if(fileReader!=null)
+        		fileReader.close();
+        	HookController.fileReader = new FileReader(file);
+        	int line = Integer.parseInt(currentItemSelected.split(" : ")[0]);
+			if(line > 0)
+				fileReader.goTo(line);
+        }
+	}
 }
