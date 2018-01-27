@@ -29,7 +29,7 @@
 }
 
 #closeRecent {
-	-fx-background-image: url("./x.png");
+	-fx-background-image: url("application/x.png");
 	-fx-background-size: cover;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center center; 
@@ -37,7 +37,7 @@
 }
 
 #closeRecent:hover  {
-	-fx-background-image: url("./xhover.png");
+	-fx-background-image: url("application/xhover.png");
 	-fx-background-size: cover;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center center; 

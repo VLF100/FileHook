@@ -26,7 +26,6 @@ public class Main extends Application {
 	        fxmlLoader.setController(hook);
 			AnchorPane root = (AnchorPane) fxmlLoader.load();
 	        Main.root = root;
-			        
 			
 	        Scene scene = new Scene(root);
 			primaryStage.setResizable(false);
@@ -67,6 +66,7 @@ public class Main extends Application {
 	
 	public static void showRecent(RecentFiles recentFiles) {
 		Node recentList = root.lookup("#recentList");
+		@SuppressWarnings("unchecked")
 		ListView<String> viewList = ((ListView<String>)recentList);
 		viewList.setOnMouseClicked(new EventHandler<MouseEvent>() {
 

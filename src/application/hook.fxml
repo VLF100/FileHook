@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="248.0" minWidth="600.0" prefHeight="248.0" prefWidth="600.0" styleClass="pane" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.151" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="238.0" prefWidth="600.0" styleClass="pane" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.151" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Button defaultButton="true" layoutX="215.0" layoutY="152.0" mnemonicParsing="false" onMouseClicked="#hookClick" prefHeight="82.0" prefWidth="170.0" stylesheets="@application.css" text="Next line">
          <font>
@@ -49,7 +49,7 @@
          </font>
       </Button>
       <Button id="recentButton" layoutX="450.0" layoutY="56.0" mnemonicParsing="false" onMouseClicked="#recentClick" prefHeight="17.0" prefWidth="122.0" styleClass="fileButton" stylesheets="@application.css" text="Recent" wrapText="true" />
-      <AnchorPane id="paneRecent" layoutX="342.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="248.0" prefWidth="252.0" styleClass="pane" stylesheets="@application.css" visible="false">
+      <AnchorPane id="paneRecent" layoutX="348.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="248.0" prefWidth="252.0" styleClass="pane" stylesheets="@application.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ListView id="recentList" layoutX="2.0" layoutY="27.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="221.0" prefWidth="209.0" stylesheets="@application.css" />
             <Button id="closeRecent" layoutX="219.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#closeClick" prefHeight="25.0" prefWidth="27.0" stylesheets="@application.css" />

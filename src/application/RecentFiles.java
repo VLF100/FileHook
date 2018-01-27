@@ -76,13 +76,12 @@ public class RecentFiles implements Serializable  {
 		FileInputStream fi = null;
 		ObjectInputStream oi = null;
 		try {
-			fi = new FileInputStream(new File("src/application/recent.save"));
+			fi = new FileInputStream(new File("recent.save"));
 			oi = new ObjectInputStream(fi);
 			recf = (RecentFiles) oi.readObject();
 		} catch (ObjectStreamException e) {
 			recf = new RecentFiles();
 		} catch (Exception e) {
-			System.err.println("An error occurred loading the recent files. Please restart and try again.");
 		}
 		if(oi!=null){
 			try {
@@ -104,7 +103,7 @@ public class RecentFiles implements Serializable  {
 	
 	public static void saveRecent(RecentFiles recentFiles){
 		try {
-			FileOutputStream f = new FileOutputStream(new File("src/application/recent.save"));
+			FileOutputStream f = new FileOutputStream(new File("recent.save"));
 			ObjectOutputStream o = new ObjectOutputStream(f);
 			o.writeObject(recentFiles);
 			o.close();
