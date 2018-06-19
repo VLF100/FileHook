@@ -1,2 +1,7 @@
 
 src/application/recent.save
+bin/
+.settings/
+.classpath
+.project
+build.fxbuild

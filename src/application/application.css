@@ -4,9 +4,24 @@
 
 .labeldata {
 	-fx-background-color: rgb(208, 206, 206);
-	-fx-border-radius: 10 10 5 5; 
-	-fx-background-radius: 10 10 5 5; 
+	-fx-border-radius: 10 10 5 5;
+	-fx-background-radius: 10 10 5 5;
 	-fx-padding: 0 0 0 10;
+}
+
+#labelTotal {
+	-fx-border-radius: 0;
+	-fx-background-radius: 0;
+	-fx-alignment: center;
+	-fx-padding: 0 0 0 0;
+	-fx-font-size: 14px;
+}
+
+#reloadButton {
+	-fx-background-image: url("application/reloadIcon.png");
+	-fx-background-size: cover;
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center center;
 }
 
 #numberlabel {
@@ -24,15 +39,15 @@
 }
 
 #recentButton {
-	-fx-border-radius: 5 5 10 10; 
-	-fx-background-radius: 5 5 10 10; 
+	-fx-border-radius: 5 5 10 10;
+	-fx-background-radius: 5 5 10 10;
 }
 
 #closeRecent {
 	-fx-background-image: url("application/x.png");
 	-fx-background-size: cover;
     -fx-background-repeat: no-repeat;
-    -fx-background-position: center center; 
+    -fx-background-position: center center;
 	-fx-background-color: rgba(0, 0, 0, 0);
 }
 
@@ -40,7 +55,7 @@
 	-fx-background-image: url("application/xhover.png");
 	-fx-background-size: cover;
     -fx-background-repeat: no-repeat;
-    -fx-background-position: center center; 
+    -fx-background-position: center center;
 	-fx-background-color: rgba(0, 0, 0, 0);
 }
 
@@ -56,5 +71,5 @@
 	-fx-border-style: solid;
     -fx-border-width: 0 3 3 0;
 	-fx-border-color: rgb(255, 255, 140);
-	
+
 }

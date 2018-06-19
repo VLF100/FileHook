@@ -48,11 +48,13 @@ public class Main extends Application {
 		((Label)fileNameLabel).setText(name);
 	}
 
-	public static void setLine(int i, String string) {
+	public static void setLine(int i, String string, int totalLines) {
 		Node numberField = root.lookup("#numberlabel");
 		((TextField)numberField).setText(Integer.toString(i));
 		Node lineLabel = root.lookup("#lineLabel");
 		((Label)lineLabel).setText(string);
+		Node totalLabel = root.lookup("#labelTotal");
+		((Label)totalLabel).setText(i+"/"+totalLines);
 	}
 
 	public static int getNumberLine() {

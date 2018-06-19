@@ -14,6 +14,7 @@
             <Font size="18.0" />
          </font>
       </Button>
+      <Button id="reloadButton" defaultButton="true" layoutX="390.0" layoutY="152.0" mnemonicParsing="false" onMouseClicked="#reloadClick" prefHeight="30.0" prefWidth="30.0" stylesheets="@application.css" />
       <Label layoutX="21.0" layoutY="33.0" styleClass="labelinfo" stylesheets="@application.css" text="File:" textFill="WHITE">
          <font>
             <Font size="24.0" />
@@ -59,5 +60,6 @@
                </font>
             </Label>
          </children></AnchorPane>
+      <Label id="labelTotal" layoutX="62.0" layoutY="182.0" prefHeight="30.0" prefWidth="116.0" styleClass="labeldata" stylesheets="@application.css" />
    </children>
 </AnchorPane>

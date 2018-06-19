@@ -27,6 +27,15 @@ public class HookController {
     }
     
     @FXML
+    void reloadClick(MouseEvent event) {
+    	if(fileReader!=null){
+			int line = Main.getNumberLine();
+			if(line > 0)
+				fileReader.goTo(line);
+		}
+    }
+    
+    @FXML
     void selectClick(MouseEvent event) {
     	FileChooser fileChooser = new FileChooser();
     	fileChooser.setTitle("Open Script File");

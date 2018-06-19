@@ -15,10 +15,22 @@ public class FileReader {
 	private FileInputStream fstream = null;
 	private BufferedReader br = null;
 	private int lineNumber;
+	private int totalLines;
 	
 	public FileReader(File file){
 		this.file = file;
 		showNameFile(this.file.getName());
+		
+		try { 
+			BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(this.file),"UTF8"));
+			int lines = 0;
+			while (reader.readLine() != null) lines++;
+			reader.close();
+			totalLines = lines;
+		} catch (Exception e) {
+			System.err.println("An error occurred starting the file. Please restart and try again.");
+		}
+		
 		startLines();
 		this.lineNumber = 0;
 		try {
@@ -31,7 +43,7 @@ public class FileReader {
 	}
 
 	private void startLines() {
-		Main.setLine(0,"Ready!");
+		Main.setLine(0,"Ready!",totalLines);
 	}
 
 	private void showNameFile(String name) {
@@ -45,7 +57,7 @@ public class FileReader {
 				strLine = br.readLine();
 				if(strLine!=null){
 					strLine = strLine.replaceAll("^\\s+", "");
-					Main.setLine(++this.lineNumber,strLine);
+					Main.setLine(++this.lineNumber,strLine,totalLines);
 					Toolkit defaultToolkit = Toolkit.getDefaultToolkit();
 					Clipboard systemClipboard = defaultToolkit.getSystemClipboard();
 					systemClipboard.setContents(new StringSelection(strLine), null);
