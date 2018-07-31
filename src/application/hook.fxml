@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="238.0" prefWidth="600.0" styleClass="pane" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.151" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="238.0" prefWidth="600.0" styleClass="pane" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.151" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button defaultButton="true" layoutX="215.0" layoutY="152.0" mnemonicParsing="false" onMouseClicked="#hookClick" prefHeight="82.0" prefWidth="170.0" stylesheets="@application.css" text="Next line">
+      <Button id="nextbutton" defaultButton="true" layoutX="215.0" layoutY="152.0" mnemonicParsing="false" onMouseClicked="#hookClick" prefHeight="82.0" prefWidth="170.0" stylesheets="@application.css" text="Next line">
          <font>
             <Font size="18.0" />
          </font>

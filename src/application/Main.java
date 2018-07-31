@@ -9,6 +9,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
@@ -30,6 +32,15 @@ public class Main extends Application {
 	        Scene scene = new Scene(root);
 			primaryStage.setResizable(false);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			
+			scene.addEventFilter(KeyEvent.KEY_RELEASED,
+	                event -> {
+	                	Node numberField = root.lookup("#numberlabel");
+	                	if(!numberField.isFocused() && event.getCode() == KeyCode.ENTER)
+	                		hook.hookClick();
+	                	}
+	                );
+			
 			
 			primaryStage.setScene(scene);
 			primaryStage.show();

@@ -26,6 +26,11 @@ public class HookController {
     		fileReader.readLine();
     }
     
+     void hookClick() {
+    	 if(fileReader!=null)
+     		fileReader.readLine();
+     }
+    
     @FXML
     void reloadClick(MouseEvent event) {
     	if(fileReader!=null){
