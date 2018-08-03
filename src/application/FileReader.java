@@ -16,48 +16,51 @@ public class FileReader {
 	private BufferedReader br = null;
 	private int lineNumber;
 	private int totalLines;
-	
-	public FileReader(File file){
+
+	public FileReader(File file) {
 		this.file = file;
 		showNameFile(this.file.getName());
-		
-		try { 
-			BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(this.file),"UTF8"));
+
+		try {
+			BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(this.file), "UTF8"));
 			int lines = 0;
-			while (reader.readLine() != null) lines++;
+			while (reader.readLine() != null)
+				lines++;
 			reader.close();
 			totalLines = lines;
 		} catch (Exception e) {
-			System.err.println("An error occurred starting the file. Please restart and try again.");
+			System.err.println("An error occurred while reading the file. Please restart and try again.");
 		}
-		
+
 		startLines();
 		this.lineNumber = 0;
 		try {
 			this.fstream = new FileInputStream(this.file);
-			this.br = new BufferedReader(new InputStreamReader(this.fstream,"UTF8"));
+			this.br = new BufferedReader(new InputStreamReader(this.fstream, "UTF8"));
 		} catch (Exception e) {
-			System.err.println("An error occurred starting the file. Please restart and try again.");
+			System.err.println("An error occurred while reading the file. Please restart and try again.");
 		}
-		
+
 	}
 
 	private void startLines() {
-		Main.setLine(0,"Ready!",totalLines);
+		Main.setLine(0, "Ready!", totalLines);
 	}
 
 	private void showNameFile(String name) {
 		Main.showFileName(name);
 	}
-	
-	public void readLine(){
+
+	public void readLine() {
 		String strLine;
 		try {
-			if(br != null){
+			if (br != null) {
 				strLine = br.readLine();
-				if(strLine!=null){
+				if (strLine != null) {
 					strLine = strLine.replaceAll("^\\s+", "");
-					Main.setLine(++this.lineNumber,strLine,totalLines);
+					if(Main.blueSkyMode) //Raw SciADV parsing
+						strLine = parseBlueSky(strLine);
+					Main.setLine(++this.lineNumber, strLine, totalLines);
 					Toolkit defaultToolkit = Toolkit.getDefaultToolkit();
 					Clipboard systemClipboard = defaultToolkit.getSystemClipboard();
 					systemClipboard.setContents(new StringSelection(strLine), null);
@@ -65,17 +68,32 @@ public class FileReader {
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
-			System.err.println("An error occurred reading the next line of the file. Please restart and try again.");
+			System.err.println("An error occurred while trying to read the next line of the file. Please restart and try again.");
 		}
 	}
-	
-	public void close(){
+
+	//Raw SciADV parsing
+	private String parseBlueSky(String s) {
+		return s.replaceAll("\\[name\\]", "")
+				.replaceAll("\\[line\\]", "")
+				.replaceAll("\\[\\.\\.\\.\\]", "...")
+				.replaceAll("\\[\\%p\\]", "")
+				.replaceAll("\\[color.+?(?=\\])\\]", "")
+				.replaceAll("\\[margin.*\\]", "")
+				.replaceAll("③⑤", "ーー")
+				.replaceAll("\\[\\%e\\]", "")
+				.replaceAll("\\[ruby-base\\]", "")
+				.replaceAll("\\[ruby-text-start\\].*\\[ruby-text-end\\]", "");
+				
+	}
+
+	public void close() {
 		try {
 			this.br.close();
 			this.fstream.close();
 		} catch (IOException e) {
 			e.printStackTrace();
-			System.err.println("Oops! This should have not happened! Restart the program and try again");
+			System.err.println("Oops! This should have not happened! Please restart and try again.");
 		}
 	}
 
@@ -84,21 +102,20 @@ public class FileReader {
 		try {
 			this.close();
 			this.fstream = new FileInputStream(this.file);
-			this.br = new BufferedReader(new InputStreamReader(this.fstream,"UTF8"));
-			while (lineCounter++ < numberLine-1 && this.br.readLine() != null);
-			this.lineNumber = numberLine-1;
+			this.br = new BufferedReader(new InputStreamReader(this.fstream, "UTF8"));
+			while (lineCounter++ < numberLine - 1 && this.br.readLine() != null)
+				;
+			this.lineNumber = numberLine - 1;
 			this.readLine();
 		} catch (IOException e) {
 			e.printStackTrace();
-			System.err.println("An error occurred reading the next line of the file. Please restart and try again.");
+			System.err.println("An error occurred while trying to read the next line of the file. Please restart and try again.");
 		}
-		
-	}
-	
-	public String[] getNameLine(){
-		return new String[] {Integer.toString(lineNumber),file.getAbsolutePath()};
+
 	}
 
-	
+	public String[] getNameLine() {
+		return new String[] { Integer.toString(lineNumber), file.getAbsolutePath() };
+	}
+
 }
-
