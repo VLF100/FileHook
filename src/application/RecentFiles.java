@@ -10,14 +10,14 @@ import java.io.ObjectOutputStream;
 import java.io.ObjectStreamException;
 import java.io.Serializable;
 
-public class RecentFiles implements Serializable  {
+public class RecentFiles implements Serializable {
 
 	public String[][] getList() {
-		if(this.list==null)
+		if (this.list == null)
 			return null;
 		String[][] list = new String[this.list.size()][2];
 		int n = 0;
-		for (OpenedFile file : this.list){
+		for (OpenedFile file : this.list) {
 			list[n][0] = Integer.toString(file.getLine());
 			list[n][1] = file.getPath();
 			n++;
@@ -27,21 +27,25 @@ public class RecentFiles implements Serializable  {
 
 	private static final long serialVersionUID = 1L;
 
-	private class OpenedFile implements Serializable{
+	private class OpenedFile implements Serializable {
 
 		private static final long serialVersionUID = 1L;
 		private String path = null;
 		private int line = 0;
-		public OpenedFile(String path,int line){
+
+		public OpenedFile(String path, int line) {
 			this.path = path;
 			this.line = line;
 		}
+
 		public String getPath() {
 			return path;
 		}
+
 		public int getLine() {
 			return line;
 		}
+
 		@Override
 		public boolean equals(Object obj) {
 			if (this == obj)
@@ -59,19 +63,19 @@ public class RecentFiles implements Serializable  {
 			return true;
 		}
 	}
-	
+
 	private LinkedList<OpenedFile> list = null;
-	
-	public void saveFile(String line,String path){
-		if(list==null)
+
+	public void saveFile(String line, String path) {
+		if (list == null)
 			list = new LinkedList<OpenedFile>();
-		OpenedFile recentFile = new OpenedFile(path,Integer.parseInt(line));
+		OpenedFile recentFile = new OpenedFile(path, Integer.parseInt(line));
 		list.remove(recentFile);
-		list.add(0,recentFile);
+		list.add(0, recentFile);
 		saveRecent(this);
 	}
-	
-	public static RecentFiles readRecent(){
+
+	public static RecentFiles readRecent() {
 		RecentFiles recf = null;
 		FileInputStream fi = null;
 		ObjectInputStream oi = null;
@@ -83,25 +87,25 @@ public class RecentFiles implements Serializable  {
 			recf = new RecentFiles();
 		} catch (Exception e) {
 		}
-		if(oi!=null){
+		if (oi != null) {
 			try {
 				oi.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
-		if(fi!=null){
+		if (fi != null) {
 			try {
 				fi.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
-		
+
 		return recf;
 	}
-	
-	public static void saveRecent(RecentFiles recentFiles){
+
+	public static void saveRecent(RecentFiles recentFiles) {
 		try {
 			FileOutputStream f = new FileOutputStream(new File("recent.save"));
 			ObjectOutputStream o = new ObjectOutputStream(f);
@@ -113,6 +117,5 @@ public class RecentFiles implements Serializable  {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
 }

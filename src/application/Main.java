@@ -1,5 +1,5 @@
 package application;
-	
+
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -14,10 +14,12 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
-
 public class Main extends Application {
-	
+
 	private static AnchorPane root;
+
+	//Raw SciADV parsing
+	public static boolean blueSkyMode = false;
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -25,87 +27,82 @@ public class Main extends Application {
 			primaryStage.setTitle("FileHook");
 			HookController hook = new HookController(primaryStage);
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/application/hook.fxml"));
-	        fxmlLoader.setController(hook);
+			fxmlLoader.setController(hook);
 			AnchorPane root = (AnchorPane) fxmlLoader.load();
-	        Main.root = root;
-			
-	        Scene scene = new Scene(root);
+			Main.root = root;
+
+			Scene scene = new Scene(root);
 			primaryStage.setResizable(false);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			
-			scene.addEventFilter(KeyEvent.KEY_RELEASED,
-	                event -> {
-	                	Node numberField = root.lookup("#numberlabel");
-	                	if(!numberField.isFocused() && event.getCode() == KeyCode.ENTER)
-	                		hook.hookClick();
-	                	}
-	                );
-			
-			
+
+			scene.addEventFilter(KeyEvent.KEY_RELEASED, event -> {
+				Node numberField = root.lookup("#numberlabel");
+				if (!numberField.isFocused() && event.getCode() == KeyCode.ENTER)
+					hook.hookClick();
+			});
+
 			primaryStage.setScene(scene);
 			primaryStage.show();
-			
-		} catch(Exception e) {
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		launch(args);
 	}
-	
-	public static void showFileName(String name){
+
+	public static void showFileName(String name) {
 		Node fileNameLabel = root.lookup("#fileName");
-		((Label)fileNameLabel).setText(name);
+		((Label) fileNameLabel).setText(name);
 	}
 
 	public static void setLine(int i, String string, int totalLines) {
 		Node numberField = root.lookup("#numberlabel");
-		((TextField)numberField).setText(Integer.toString(i));
+		((TextField) numberField).setText(Integer.toString(i));
 		Node lineLabel = root.lookup("#lineLabel");
-		((Label)lineLabel).setText(string);
+		((Label) lineLabel).setText(string);
 		Node totalLabel = root.lookup("#labelTotal");
-		((Label)totalLabel).setText(i+"/"+totalLines);
+		((Label) totalLabel).setText(i + "/" + totalLines);
 	}
 
 	public static int getNumberLine() {
 		Node numberField = root.lookup("#numberlabel");
 		try {
-			return new Integer(((TextField)numberField).getText());
-		} catch (NumberFormatException e){
+			return new Integer(((TextField) numberField).getText());
+		} catch (NumberFormatException e) {
 			return -1;
 		}
 	}
-	
+
 	public static void showRecent(RecentFiles recentFiles) {
 		Node recentList = root.lookup("#recentList");
 		@SuppressWarnings("unchecked")
-		ListView<String> viewList = ((ListView<String>)recentList);
+		ListView<String> viewList = ((ListView<String>) recentList);
 		viewList.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
-		    @Override
-		    public void handle(MouseEvent click) {
+			@Override
+			public void handle(MouseEvent click) {
 
-		        if (click.getClickCount() == 2) {
-		           String currentItemSelected = viewList.getSelectionModel()
-		                                                    .getSelectedItem();
-		           HookController.openRecent(currentItemSelected);
-		        }
-		    }
+				if (click.getClickCount() == 2) {
+					String currentItemSelected = viewList.getSelectionModel().getSelectedItem();
+					HookController.openRecent(currentItemSelected);
+				}
+			}
 		});
-		if(viewList.getItems()!=null)
+		if (viewList.getItems() != null)
 			viewList.getItems().clear();
-		if(recentFiles!=null && recentFiles.getList()!=null)
-				for(String[] line_path: recentFiles.getList())
-					viewList.getItems().add(line_path[0]+" : "+line_path[1]);
+		if (recentFiles != null && recentFiles.getList() != null)
+			for (String[] line_path : recentFiles.getList())
+				viewList.getItems().add(line_path[0] + " : " + line_path[1]);
 		Node recentPane = root.lookup("#paneRecent");
 		recentPane.setVisible(true);
 	}
-	
+
 	public static void closeRecent() {
 		Node recentPane = root.lookup("#paneRecent");
 		recentPane.setVisible(false);
 	}
-	
-	
+
 }
