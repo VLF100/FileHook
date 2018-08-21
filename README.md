@@ -16,5 +16,8 @@ Basic use:
  
 Features yet to be implemented:
   * Add nickname to save points
+  * Add menu for specific and beta features
+	* Find the blue feature
+	* Next file prediction
   * Nothing more planned for now
 	

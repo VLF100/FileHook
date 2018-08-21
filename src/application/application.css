@@ -2,6 +2,7 @@
 	-fx-background-color: rgb(26, 26, 26);
 }
 
+
 .labeldata {
 	-fx-background-color: rgb(208, 206, 206);
 	-fx-border-radius: 10 10 5 5;
@@ -38,6 +39,12 @@
 	-fx-border-color: rgb(255, 255, 140);
 }
 
+#paneBeta {
+	-fx-border-style: solid;
+    -fx-border-width: 0 3 0 0;
+	-fx-border-color: rgb(255, 255, 140);
+}
+
 #recentButton {
 	-fx-border-radius: 5 5 10 10;
 	-fx-background-radius: 5 5 10 10;
@@ -67,9 +74,24 @@
 	-fx-border-color: rgb(255, 255, 140);
 }
 
+#betaList {
+	-fx-background-insets: 0;
+	-fx-padding: 0;
+	-fx-border-style: solid;
+    -fx-border-width: 0 3 0 3;
+	-fx-border-color: rgb(255, 255, 140);
+}
+
 #labelRecent {
 	-fx-border-style: solid;
     -fx-border-width: 0 3 3 0;
+	-fx-border-color: rgb(255, 255, 140);
+
+}
+
+#labelBeta {
+	-fx-border-style: solid;
+    -fx-border-width: 0 3 3 3;
 	-fx-border-color: rgb(255, 255, 140);
 
 }

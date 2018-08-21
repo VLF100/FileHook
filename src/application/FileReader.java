@@ -118,4 +118,8 @@ public class FileReader {
 		return new String[] { Integer.toString(lineNumber), file.getAbsolutePath() };
 	}
 
+	public String getPath() {
+		return this.file.getParent();
+	}
+
 }

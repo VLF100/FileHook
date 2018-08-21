@@ -105,4 +105,14 @@ public class Main extends Application {
 		recentPane.setVisible(false);
 	}
 
+	public static void showBeta() {
+		Node recentPane = root.lookup("#paneBeta");
+		recentPane.setVisible(true);
+	}
+	
+	public static void closeBeta() {
+		Node recentPane = root.lookup("#paneBeta");
+		recentPane.setVisible(false);
+	}
+
 }
