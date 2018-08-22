@@ -12,10 +12,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Font;
 
 /**
  * Main class of the application.
@@ -51,6 +53,10 @@ public class Main extends Application {
 			});
 
 			primaryStage.setScene(scene);
+			primaryStage.setAlwaysOnTop(true);
+			
+			Main.setTooltips();
+			
 			primaryStage.show();
 			
 			Main.primaryStage = primaryStage;
@@ -62,6 +68,26 @@ public class Main extends Application {
 
 	public static void main(String[] args) {
 		launch(args);
+	}
+	
+	//Set tooltips of various elements
+	public static void setTooltips(){
+		Node nextArrow = Main.root.lookup("#nextScript");
+		Tooltip.install(nextArrow, Main.generateStandardTooltip("Go to the next file in alphabetical order")); 
+		Node numberField = Main.root.lookup("#numberlabel");
+		Tooltip.install(numberField, Main.generateStandardTooltip("Input number of line and press enter")); 
+		Node blueSkyMode = Main.root.lookup("#blueSkyMode");
+		Tooltip.install(blueSkyMode, Main.generateStandardTooltip("Parsing for scripts with ruby text")); 
+		
+	}
+	
+	//Function to generate tooltips with the same parameters
+	private static Tooltip generateStandardTooltip(String text){
+		Tooltip tooltip = new Tooltip(text);
+		tooltip.setWrapText(true);
+		tooltip.setMaxWidth(150);
+		tooltip.setFont(new Font(13));
+		return tooltip;
 	}
 
 	//Control of the filename label
@@ -127,13 +153,13 @@ public class Main extends Application {
 		recentPane.setVisible(false);
 	}
 
-	//Control of the "beta features" side menu
-	public static void showBeta() {
-		Node recentPane = Main.root.lookup("#paneBeta");
+	//Control of the "delta features" side menu
+	public static void showDelta() {
+		Node recentPane = Main.root.lookup("#paneDelta");
 		recentPane.setVisible(true);
 	}
-	public static void closeBeta() {
-		Node recentPane = Main.root.lookup("#paneBeta");
+	public static void closeDelta() {
+		Node recentPane = Main.root.lookup("#paneDelta");
 		recentPane.setVisible(false);
 	}
 

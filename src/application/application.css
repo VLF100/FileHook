@@ -39,7 +39,7 @@
 	-fx-border-color: rgb(255, 255, 140);
 }
 
-#paneBeta {
+#paneDelta {
 	-fx-border-style: solid;
     -fx-border-width: 0 3 0 0;
 	-fx-border-color: rgb(255, 255, 140);
@@ -90,7 +90,7 @@
 	-fx-border-color: rgb(255, 255, 140);
 }
 
-#betaList {
+#deltaList {
 	-fx-background-insets: 0;
 	-fx-padding: 0;
 	-fx-border-style: solid;
@@ -105,14 +105,9 @@
 
 }
 
-#labelBeta {
+#labelDelta {
 	-fx-border-style: solid;
     -fx-border-width: 0 3 3 3;
 	-fx-border-color: rgb(255, 255, 140);
 
-}
-
-#blueSkyMode {
-	-fx-background-color: rgb(26, 26, 26);
-	-fx-text-fill: rgb(255, 255, 255);
 }

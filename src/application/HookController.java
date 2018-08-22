@@ -108,16 +108,16 @@ public class HookController {
 		}
 	}
 
-	//Beta button. Shows beta features side menu.
+	//Delta button. Shows delta features side menu.
     @FXML
-    void betaClick(MouseEvent event) {
-    	Main.showBeta();
+    void deltaClick(MouseEvent event) {
+    	Main.showDelta();
     }
 
-    //X button from the beta features side menu. Closes the menu.
+    //X button from the delta features side menu. Closes the menu.
     @FXML
-    void closeBeta(MouseEvent event) {
-    	Main.closeBeta();
+    void closeDelta(MouseEvent event) {
+    	Main.closeDelta();
     }
 
     //Next Script/Arrow button. Goes to next script file in alphabetical order.

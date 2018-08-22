@@ -51,7 +51,7 @@
          </font>
       </Button>
       <Button id="recentButton" layoutX="450.0" layoutY="56.0" mnemonicParsing="false" onMouseClicked="#recentClick" prefHeight="17.0" prefWidth="122.0" styleClass="fileButton" stylesheets="@application.css" text="Recent" wrapText="true" />
-      <Button defaultButton="true" layoutX="14.0" layoutY="178.0" mnemonicParsing="false" onMouseClicked="#betaClick" prefHeight="30.0" prefWidth="30.0" stylesheets="@application.css" text="β" textAlignment="CENTER">
+      <Button defaultButton="true" layoutX="14.0" layoutY="178.0" mnemonicParsing="false" onMouseClicked="#deltaClick" prefHeight="30.0" prefWidth="30.0" stylesheets="@application.css" text="Δ" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -68,21 +68,16 @@
                </font>
             </Label>
          </children></AnchorPane>
-      <AnchorPane id="paneBeta" layoutY="-5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="248.0" prefWidth="252.0" styleClass="pane" stylesheets="@application.css" visible="false">
+      <AnchorPane id="paneDelta" layoutY="-5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="248.0" prefWidth="252.0" styleClass="pane" stylesheets="@application.css" visible="false">
          <children>
-            <ListView id="betaList" layoutX="43.0" layoutY="33.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="221.0" prefWidth="209.0" stylesheets="@application.css" />
-            <Label id="labelBeta" alignment="CENTER" layoutX="43.0" layoutY="4.0" prefHeight="27.0" prefWidth="209.0" styleClass="labelinfo" stylesheets="@application.css" text="Beta features" textAlignment="CENTER" textFill="WHITE">
+            <ListView id="deltaList" layoutX="43.0" layoutY="33.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="221.0" prefWidth="209.0" stylesheets="@application.css" />
+            <Label id="labelDelta" alignment="CENTER" layoutX="43.0" layoutY="4.0" prefHeight="27.0" prefWidth="209.0" styleClass="labelinfo" stylesheets="@application.css" text="Other features" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Button id="closeRecent" layoutX="10.0" layoutY="7.0" mnemonicParsing="false" onMouseClicked="#closeBeta" prefHeight="25.0" prefWidth="27.0" stylesheets="@application.css" />
-      	  <CheckBox id="blueSkyMode" alignment="CENTER" layoutX="88.0" layoutY="48.0" mnemonicParsing="false" onMouseClicked="#blueSkyFire" prefHeight="30.0" prefWidth="120.0" stylesheets="@application.css" text="Blue Sky Mode" />
-            <Button id="selectButton" layoutX="87.0" layoutY="105.0" mnemonicParsing="false" onMouseClicked="#nextClick" prefHeight="25.0" prefWidth="122.0" styleClass="fileButton" stylesheets="@application.css" text="Next script">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
+            <Button id="closeRecent" layoutX="10.0" layoutY="7.0" mnemonicParsing="false" onMouseClicked="#closeDelta" prefHeight="25.0" prefWidth="27.0" stylesheets="@application.css" />
+      	  <CheckBox id="blueSkyMode" alignment="CENTER" layoutX="53.0" layoutY="37.0" mnemonicParsing="false" onMouseClicked="#blueSkyFire" prefHeight="30.0" prefWidth="120.0" stylesheets="@application.css" text="Blue Sky Mode" />
          </children>
       </AnchorPane>
    </children>
