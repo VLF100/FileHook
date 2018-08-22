@@ -1,8 +1,11 @@
 package application;
 
+import java.io.File;
+
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -14,35 +17,43 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
+/**
+ * Main class of the application.
+ * Controls everything related to the display and user interface.
+ *
+ */
 public class Main extends Application {
 
 	private static AnchorPane root;
+	private static Stage primaryStage;
 
-	//Raw SciADV parsing
+	//Parsing for scripts with ruby text
 	public static boolean blueSkyMode = false;
 	
 	@Override
 	public void start(Stage primaryStage) {
 		try {
 			primaryStage.setTitle("FileHook");
-			HookController hook = new HookController(primaryStage);
+			HookController hook = new HookController();
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/application/hook.fxml"));
 			fxmlLoader.setController(hook);
-			AnchorPane root = (AnchorPane) fxmlLoader.load();
-			Main.root = root;
+			Main.root = (AnchorPane) fxmlLoader.load();
 
-			Scene scene = new Scene(root);
+			Scene scene = new Scene(Main.root);
 			primaryStage.setResizable(false);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
+			//Code to listen to enter key input
 			scene.addEventFilter(KeyEvent.KEY_RELEASED, event -> {
-				Node numberField = root.lookup("#numberlabel");
+				Node numberField = Main.root.lookup("#numberlabel");
 				if (!numberField.isFocused() && event.getCode() == KeyCode.ENTER)
-					hook.hookClick();
+					hook.hookClick(null);
 			});
 
 			primaryStage.setScene(scene);
 			primaryStage.show();
+			
+			Main.primaryStage = primaryStage;
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -53,22 +64,25 @@ public class Main extends Application {
 		launch(args);
 	}
 
+	//Control of the filename label
 	public static void showFileName(String name) {
-		Node fileNameLabel = root.lookup("#fileName");
+		Node fileNameLabel = Main.root.lookup("#fileName");
 		((Label) fileNameLabel).setText(name);
 	}
 
+	//Control of the labels related to the current line
 	public static void setLine(int i, String string, int totalLines) {
-		Node numberField = root.lookup("#numberlabel");
+		Node numberField = Main.root.lookup("#numberlabel");
 		((TextField) numberField).setText(Integer.toString(i));
-		Node lineLabel = root.lookup("#lineLabel");
+		Node lineLabel = Main.root.lookup("#lineLabel");
 		((Label) lineLabel).setText(string);
-		Node totalLabel = root.lookup("#labelTotal");
+		Node totalLabel = Main.root.lookup("#labelTotal");
 		((Label) totalLabel).setText(i + "/" + totalLines);
 	}
 
+	//Function to obtain the contents of the number line label
 	public static int getNumberLine() {
-		Node numberField = root.lookup("#numberlabel");
+		Node numberField = Main.root.lookup("#numberlabel");
 		try {
 			return new Integer(((TextField) numberField).getText());
 		} catch (NumberFormatException e) {
@@ -76,10 +90,19 @@ public class Main extends Application {
 		}
 	}
 
+	//Control of selection script window
+	public static File selectScript(){
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Open script file...");
+		return fileChooser.showOpenDialog(primaryStage);
+	}
+	
+	//Control of the "recent list of files" side menu
 	public static void showRecent(RecentFiles recentFiles) {
-		Node recentList = root.lookup("#recentList");
+		Node recentList = Main.root.lookup("#recentList");
 		@SuppressWarnings("unchecked")
 		ListView<String> viewList = ((ListView<String>) recentList);
+		//set action for when item selected with a double click
 		viewList.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override
@@ -96,22 +119,21 @@ public class Main extends Application {
 		if (recentFiles != null && recentFiles.getList() != null)
 			for (String[] line_path : recentFiles.getList())
 				viewList.getItems().add(line_path[0] + " : " + line_path[1]);
-		Node recentPane = root.lookup("#paneRecent");
+		Node recentPane = Main.root.lookup("#paneRecent");
 		recentPane.setVisible(true);
 	}
-
 	public static void closeRecent() {
-		Node recentPane = root.lookup("#paneRecent");
+		Node recentPane = Main.root.lookup("#paneRecent");
 		recentPane.setVisible(false);
 	}
 
+	//Control of the "beta features" side menu
 	public static void showBeta() {
-		Node recentPane = root.lookup("#paneBeta");
+		Node recentPane = Main.root.lookup("#paneBeta");
 		recentPane.setVisible(true);
 	}
-	
 	public static void closeBeta() {
-		Node recentPane = root.lookup("#paneBeta");
+		Node recentPane = Main.root.lookup("#paneBeta");
 		recentPane.setVisible(false);
 	}
 

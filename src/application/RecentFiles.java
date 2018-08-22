@@ -10,6 +10,10 @@ import java.io.ObjectOutputStream;
 import java.io.ObjectStreamException;
 import java.io.Serializable;
 
+/**
+ * Model for the save & load of recent files.
+ *
+ */
 public class RecentFiles implements Serializable {
 
 	public String[][] getList() {

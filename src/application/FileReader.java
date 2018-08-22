@@ -9,6 +9,11 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+
+/**
+ * Model for reading the data and lines from files.
+ *
+ */
 public class FileReader {
 
 	private File file = null;
@@ -58,7 +63,7 @@ public class FileReader {
 				strLine = br.readLine();
 				if (strLine != null) {
 					strLine = strLine.replaceAll("^\\s+", "");
-					if(Main.blueSkyMode) //Raw SciADV parsing
+					if(Main.blueSkyMode) //Parsing for scripts with ruby text
 						strLine = parseBlueSky(strLine);
 					Main.setLine(++this.lineNumber, strLine, totalLines);
 					Toolkit defaultToolkit = Toolkit.getDefaultToolkit();
@@ -72,7 +77,7 @@ public class FileReader {
 		}
 	}
 
-	//Raw SciADV parsing
+	//Parsing for scripts with ruby text
 	private String parseBlueSky(String s) {
 		return s.replaceAll("\\[name\\]", "")
 				.replaceAll("\\[line\\]", "")
@@ -84,7 +89,6 @@ public class FileReader {
 				.replaceAll("\\[\\%e\\]", "")
 				.replaceAll("\\[ruby-base\\]", "")
 				.replaceAll("\\[ruby-text-start\\].*\\[ruby-text-end\\]", "");
-				
 	}
 
 	public void close() {

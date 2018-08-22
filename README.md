@@ -19,5 +19,6 @@ Features yet to be implemented:
   * Add menu for specific and beta features
 	* Find the blue feature
 	* Next file prediction
+  * Drag and drop function
   * Nothing more planned for now
 	
