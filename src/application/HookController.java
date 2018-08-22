@@ -9,6 +9,8 @@ import javafx.stage.FileChooser;
 import javafx.stage.Window;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.Comparator;
 
 public class HookController {
 
@@ -117,17 +119,45 @@ public class HookController {
 
     @FXML
     void nextClick(MouseEvent event) {
-    	String path = this.fileReader.getPath();
+    	if(fileReader == null)
+    		return;
+    	
+    	String name = fileReader.getName();
+    	String path = fileReader.getPath();
+    	
+    	if(path == null)
+    		return;
+    	
     	File folder = new File(path);
     	File[] listOfFiles = folder.listFiles();
+    	
+    	class CompFiles implements Comparator<File> {
+
+			@Override
+			public int compare(File o1, File o2) {
+				return o1.getName().compareTo(o2.getName());
+			}
+    		
+    	}
+    	
+    	Comparator<File> compFiles = new CompFiles();
+    	
+    	Arrays.sort(listOfFiles,compFiles);
+    	
     	for (int i = 0; i < listOfFiles.length; i++) {
     		  if (listOfFiles[i].isFile()) {
-    		    System.out.println("File " + listOfFiles[i].getName());
+    			if(listOfFiles[i].getName().equals(name))
+    				if(i+1 < listOfFiles.length){
+    					System.out.println("File " + listOfFiles[i+1].getName());
+    					HookController.fileReader.close();
+    					HookController.fileReader = new FileReader(listOfFiles[i+1]);
+    				}
+    			//System.out.println("File " + listOfFiles[i].getName());
     		  } else if (listOfFiles[i].isDirectory()) {
-    		    System.out.println("Directory " + listOfFiles[i].getName());
+    		    continue;
+    			//System.out.println("Directory " + listOfFiles[i].getName());
     		  }
     	}
     }
-
 
 }

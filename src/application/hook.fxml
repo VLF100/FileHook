@@ -30,7 +30,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Label id="fileName" layoutX="79.0" layoutY="33.0" prefHeight="35.0" prefWidth="363.0" styleClass="labeldata" stylesheets="@application.css">
+      <Label id="fileName" layoutX="79.0" layoutY="33.0" prefHeight="35.0" prefWidth="327.0" styleClass="labeldata" stylesheets="@application.css">
          <font>
             <Font size="24.0" />
          </font>
@@ -51,12 +51,13 @@
          </font>
       </Button>
       <Button id="recentButton" layoutX="450.0" layoutY="56.0" mnemonicParsing="false" onMouseClicked="#recentClick" prefHeight="17.0" prefWidth="122.0" styleClass="fileButton" stylesheets="@application.css" text="Recent" wrapText="true" />
-      <Button id="reloadButton" defaultButton="true" layoutX="14.0" layoutY="178.0" mnemonicParsing="false" onMouseClicked="#betaClick" prefHeight="30.0" prefWidth="30.0" stylesheets="@application.css" text="β" textAlignment="CENTER">
+      <Button defaultButton="true" layoutX="14.0" layoutY="178.0" mnemonicParsing="false" onMouseClicked="#betaClick" prefHeight="30.0" prefWidth="30.0" stylesheets="@application.css" text="β" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
       <Label id="labelTotal" layoutX="62.0" layoutY="182.0" prefHeight="30.0" prefWidth="116.0" styleClass="labeldata" stylesheets="@application.css" />
+      <Button id="nextScript" layoutX="412.0" layoutY="38.0" mnemonicParsing="false" onMouseClicked="#nextClick" prefHeight="25.0" prefWidth="27.0" stylesheets="@application.css" />
       <AnchorPane id="paneRecent" layoutX="348.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="248.0" prefWidth="252.0" styleClass="pane" stylesheets="@application.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ListView id="recentList" layoutX="2.0" layoutY="27.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="221.0" prefWidth="209.0" stylesheets="@application.css" />

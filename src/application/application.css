@@ -66,6 +66,22 @@
 	-fx-background-color: rgba(0, 0, 0, 0);
 }
 
+#nextScript {
+	-fx-background-image: url("application/arrow.png");
+	-fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+	-fx-background-color: rgba(0, 0, 0, 0);
+}
+
+#nextScript:hover  {
+	-fx-background-image: url("application/arrowhover.png");
+	-fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+	-fx-background-color: rgba(0, 0, 0, 0);
+}
+
 #recentList {
 	-fx-background-insets: 0;
 	-fx-padding: 0;

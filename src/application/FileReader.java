@@ -122,4 +122,8 @@ public class FileReader {
 		return this.file.getParent();
 	}
 
+	public String getName() {
+		return this.file.getName();
+	}
+
 }
