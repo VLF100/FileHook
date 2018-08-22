@@ -21,8 +21,11 @@ Features yet to be implemented:
   * Nothing more planned for now
   
 Features implemented but not launched:
+  * Application is now always on top of screen when possible.
+  * Added Enter key functionality to advance line.
   * Added tooltips for some elements
   * Added "Next Script"/Arrow button to go instantly to next file in alphabetical order
-  * Added Delta menu with extra or specific features
+  * Added Delta menu with extra or specific features.
+    * Added Blue Sky Mode for parsing of a cleaner parsing of scripts with ruby text.
   * Nothing more added for now. Check latest release.
 	
