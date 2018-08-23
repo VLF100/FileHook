@@ -119,6 +119,12 @@ public class HookController {
     void closeDelta(MouseEvent event) {
     	Main.closeDelta();
     }
+    
+    //Function to enable/disable the "Always on top" functionality with the checkbox.
+    @FXML
+    void topFire(MouseEvent event) {
+    	Main.toogleAlwaysOnTop();
+    }
 
     //Next Script/Arrow button. Goes to next script file in alphabetical order.
     @FXML

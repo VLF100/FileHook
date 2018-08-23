@@ -9,6 +9,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -73,12 +74,13 @@ public class Main extends Application {
 	//Set tooltips of various elements
 	public static void setTooltips(){
 		Node nextArrow = Main.root.lookup("#nextScript");
-		Tooltip.install(nextArrow, Main.generateStandardTooltip("Go to the next file in alphabetical order")); 
+		Tooltip.install(nextArrow, Main.generateStandardTooltip("Go to the next file in alphabetical order.")); 
 		Node numberField = Main.root.lookup("#numberlabel");
-		Tooltip.install(numberField, Main.generateStandardTooltip("Input number of line and press enter")); 
+		Tooltip.install(numberField, Main.generateStandardTooltip("Input number of line and press enter.")); 
 		Node blueSkyMode = Main.root.lookup("#blueSkyMode");
-		Tooltip.install(blueSkyMode, Main.generateStandardTooltip("Parsing for scripts with ruby text")); 
-		
+		Tooltip.install(blueSkyMode, Main.generateStandardTooltip("Parsing for scripts with ruby text.")); 
+		Node alwaysOnTopMode = Main.root.lookup("#alwaysOnTopMode");
+		Tooltip.install(alwaysOnTopMode, Main.generateStandardTooltip("Keep the application on the foreground.")); 
 	}
 	
 	//Function to generate tooltips with the same parameters
@@ -161,6 +163,11 @@ public class Main extends Application {
 	public static void closeDelta() {
 		Node recentPane = Main.root.lookup("#paneDelta");
 		recentPane.setVisible(false);
+	}
+
+	public static void toogleAlwaysOnTop() {
+		Node topFire = Main.root.lookup("#alwaysOnTopMode");
+		primaryStage.setAlwaysOnTop(((CheckBox)topFire).isSelected());
 	}
 
 }

@@ -77,7 +77,8 @@
                </font>
             </Label>
             <Button id="closeRecent" layoutX="10.0" layoutY="7.0" mnemonicParsing="false" onMouseClicked="#closeDelta" prefHeight="25.0" prefWidth="27.0" stylesheets="@application.css" />
-      	  <CheckBox id="blueSkyMode" alignment="CENTER" layoutX="53.0" layoutY="37.0" mnemonicParsing="false" onMouseClicked="#blueSkyFire" prefHeight="30.0" prefWidth="120.0" stylesheets="@application.css" text="Blue Sky Mode" />
+      	  <CheckBox id="blueSkyMode" alignment="CENTER" layoutX="56.0" layoutY="66.0" mnemonicParsing="false" onMouseClicked="#blueSkyFire" prefHeight="30.0" prefWidth="120.0" stylesheets="@application.css" text="Blue Sky Mode" />
+            <CheckBox id="alwaysOnTopMode" alignment="CENTER" layoutX="56.0" layoutY="37.0" mnemonicParsing="false" onMouseClicked="#topFire" prefHeight="30.0" prefWidth="120.0" selected="true" stylesheets="@application.css" text="Always on top" />
          </children>
       </AnchorPane>
    </children>

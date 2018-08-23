@@ -17,7 +17,7 @@ Basic use:
 Features yet to be implemented:
   * Add nickname to save points
   * Drag and drop function
-  * Option to disable "always on top" function
+  * Set icon for the application
   * Nothing more planned for now
   
 Features implemented but not launched:
@@ -27,5 +27,6 @@ Features implemented but not launched:
   * Added "Next Script"/Arrow button to go instantly to next file in alphabetical order
   * Added Delta menu with extra or specific features.
     * Added Blue Sky Mode for parsing of a cleaner parsing of scripts with ruby text.
+    * Option to disable "always on top" function
   * Nothing more added for now. Check latest release.
 	
