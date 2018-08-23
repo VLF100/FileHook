@@ -1,5 +1,6 @@
 package application;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -19,7 +20,7 @@ import application.RecentFiles.OpenedFile;
 public class HookController {
 
 	private static FileReader fileReader;
-	private static List recentFiles = null;
+	private static List<OpenedFile> recentFiles = null;
 
 	public HookController() {}
 
@@ -77,7 +78,7 @@ public class HookController {
 			recentFiles = RecentFiles.readFile();
 		if (fileReader != null) {
 			String[] nameline = fileReader.getNameLine();
-			RecentFiles.addToList(nameline[0], nameline[1],"");
+			RecentFiles.addToList(nameline[0], nameline[1], null);
 		}
 	}
 
@@ -166,6 +167,11 @@ public class HookController {
     		    continue;
     		  }
     	}
+    }
+    
+    @FXML
+    void saveWithNick(ActionEvent event) {
+    	Main.showNicknameModal();
     }
 
 }

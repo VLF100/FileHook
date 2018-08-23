@@ -1,7 +1,7 @@
 package application;
 
 import java.io.File;
-import java.util.Iterator;
+import java.io.IOException;
 import java.util.List;
 
 import application.RecentFiles.OpenedFile;
@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -32,8 +33,12 @@ import javafx.scene.text.Font;
  */
 public class Main extends Application {
 
-	private static AnchorPane root;
+	
 	private static Stage primaryStage;
+	private static AnchorPane root;
+	
+	private static Stage nickModal;
+	private static AnchorPane nickModalPane;
 
 	//Parsing for scripts with ruby text
 	public static boolean blueSkyMode = false;
@@ -133,9 +138,9 @@ public class Main extends Application {
 	}
 	
 	//Control of the "recent list of files" side menu
-	public static void showRecent(List recentFiles) {
-		ListView<OpenedFile> recentList = (ListView<OpenedFile>)Main.root.lookup("#recentList");
+	public static void showRecent(List<OpenedFile> recentFiles) {
 		@SuppressWarnings("unchecked")
+		ListView<OpenedFile> recentList = (ListView<OpenedFile>)Main.root.lookup("#recentList");
 		ListView<OpenedFile> viewList = ((ListView<OpenedFile>) recentList);
 		
 		ObservableList<OpenedFile> wordsList = FXCollections.observableArrayList(RecentFiles.readFile()); 
@@ -175,6 +180,72 @@ public class Main extends Application {
 	public static void toogleAlwaysOnTop() {
 		Node topFire = Main.root.lookup("#alwaysOnTopMode");
 		primaryStage.setAlwaysOnTop(((CheckBox)topFire).isSelected());
+	}
+
+	public static void showNicknameModal() {
+		if(nickModal == null){
+			nickModal = new Stage();
+			nickModal.setTitle("Introduce nickname to save the progress");
+			FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/application/nicknamemodal.fxml"));
+			fxmlLoader.setController(new ModalController());
+			nickModalPane = null;
+			
+			try {
+				nickModalPane = (AnchorPane) fxmlLoader.load();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		
+			Scene scene = new Scene(nickModalPane);
+			scene.getStylesheets().add(Main.class.getResource("application.css").toExternalForm());
+			nickModal.setScene(scene);
+			
+			nickModal.setResizable(false);
+			nickModal.initOwner(primaryStage);
+			nickModal.initModality(Modality.APPLICATION_MODAL);
+			
+			Node nickField = nickModalPane.lookup("#nickField");
+			Tooltip.install(nickField, Main.generateStandardTooltip("Must not be empty and lesser than 25 characters.")); 
+            
+		}
+		
+		double centerXPosition = primaryStage.getX() + primaryStage.getWidth()/2d;
+        double centerYPosition = primaryStage.getY() + primaryStage.getHeight()/2d;
+        
+        nickModal.setOnShown(ev -> {
+        	nickModal.setX(centerXPosition - nickModal.getWidth()/2d);
+            nickModal.setY(centerYPosition - nickModal.getHeight()/2d);
+            nickModal.show();
+        });
+        
+		nickModal.showAndWait();
+		
+	}
+	
+	public static void closeNicknameModal() {
+		nickModal.close();
+	}
+
+	public static String getNicknameModalField() {
+		Node nickfield = nickModalPane.lookup("#nickField");
+		return ((TextField) nickfield).getText();
+	}
+
+	public static void nicknameModalShowError() {
+		System.out.println("in");
+		Node nickfield = nickModalPane.lookup("#nickField");
+		nickfield.getStyleClass().add("textfieldError");
+		
+		new java.util.Timer().schedule( 
+		        new java.util.TimerTask() {
+		            @Override
+		            public void run() {
+		            	nickfield.getStyleClass().remove("textfieldError");
+		            }
+		        }, 
+		        3000 
+		);
+		
 	}
 
 }
