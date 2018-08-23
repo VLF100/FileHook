@@ -1,8 +1,13 @@
 package application;
 
 import java.io.File;
+import java.util.Iterator;
+import java.util.List;
 
+import application.RecentFiles.OpenedFile;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.FileChooser;
@@ -61,6 +66,8 @@ public class Main extends Application {
 			primaryStage.show();
 			
 			Main.primaryStage = primaryStage;
+			
+			RecentFiles.readFile();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -126,27 +133,27 @@ public class Main extends Application {
 	}
 	
 	//Control of the "recent list of files" side menu
-	public static void showRecent(RecentFiles recentFiles) {
-		Node recentList = Main.root.lookup("#recentList");
+	public static void showRecent(List recentFiles) {
+		ListView<OpenedFile> recentList = (ListView<OpenedFile>)Main.root.lookup("#recentList");
 		@SuppressWarnings("unchecked")
-		ListView<String> viewList = ((ListView<String>) recentList);
+		ListView<OpenedFile> viewList = ((ListView<OpenedFile>) recentList);
+		
+		ObservableList<OpenedFile> wordsList = FXCollections.observableArrayList(RecentFiles.readFile()); 
+		viewList.setItems(wordsList);
 		//set action for when item selected with a double click
+		
 		viewList.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent click) {
 
 				if (click.getClickCount() == 2) {
-					String currentItemSelected = viewList.getSelectionModel().getSelectedItem();
+					OpenedFile currentItemSelected = viewList.getSelectionModel().getSelectedItem();
 					HookController.openRecent(currentItemSelected);
 				}
 			}
 		});
-		if (viewList.getItems() != null)
-			viewList.getItems().clear();
-		if (recentFiles != null && recentFiles.getList() != null)
-			for (String[] line_path : recentFiles.getList())
-				viewList.getItems().add(line_path[0] + " : " + line_path[1]);
+		
 		Node recentPane = Main.root.lookup("#paneRecent");
 		recentPane.setVisible(true);
 	}

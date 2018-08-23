@@ -8,6 +8,9 @@ import javafx.scene.input.MouseEvent;
 import java.io.File;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
+
+import application.RecentFiles.OpenedFile;
 
 /**
  * Controller of the actions the user does.
@@ -16,7 +19,7 @@ import java.util.Comparator;
 public class HookController {
 
 	private static FileReader fileReader;
-	private static RecentFiles recentFiles = null;
+	private static List recentFiles = null;
 
 	public HookController() {}
 
@@ -63,7 +66,7 @@ public class HookController {
 	//Recent button. Shows side menu of recent files.
 	@FXML
 	void recentClick(MouseEvent event) {
-		recentFiles = RecentFiles.readRecent();
+		recentFiles = RecentFiles.readFile();
 		Main.showRecent(recentFiles);
 	}
 
@@ -71,12 +74,10 @@ public class HookController {
 	@FXML
 	void saveClick(MouseEvent event) {
 		if (recentFiles == null)
-			recentFiles = RecentFiles.readRecent();
-		if (recentFiles == null)
-			recentFiles = new RecentFiles();
+			recentFiles = RecentFiles.readFile();
 		if (fileReader != null) {
 			String[] nameline = fileReader.getNameLine();
-			recentFiles.saveFile(nameline[0], nameline[1]);
+			RecentFiles.addToList(nameline[0], nameline[1],"");
 		}
 	}
 
@@ -95,14 +96,13 @@ public class HookController {
 	}
 
 	//Function to open a file from the recent files side menu.
-	public static void openRecent(String currentItemSelected) {
-		String path = currentItemSelected.split(" : ")[1];
-		File file = new File(path);
+	public static void openRecent(OpenedFile currentItemSelected) {
+		File file = new File(currentItemSelected.getPath());
 		if (file != null) {
 			if (fileReader != null)
 				fileReader.close();
 			HookController.fileReader = new FileReader(file);
-			int line = Integer.parseInt(currentItemSelected.split(" : ")[0]);
+			int line = currentItemSelected.getLine();
 			if (line > 0)
 				fileReader.goTo(line);
 		}

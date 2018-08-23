@@ -1,49 +1,91 @@
 package application;
 
 import java.util.LinkedList;
+import java.util.List;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.ObjectStreamException;
 import java.io.Serializable;
 
 /**
  * Model for the save & load of recent files.
  *
  */
-public class RecentFiles implements Serializable {
-
-	public String[][] getList() {
-		if (this.list == null)
-			return null;
-		String[][] list = new String[this.list.size()][2];
-		int n = 0;
-		for (OpenedFile file : this.list) {
-			list[n][0] = Integer.toString(file.getLine());
-			list[n][1] = file.getPath();
-			n++;
-		}
-		return list;
+public class RecentFiles {
+	private static List<OpenedFile> recentFilesList = null;
+	
+	public static void addToList(String line, String path, String nickname) {
+		recentFilesList.add(new OpenedFile(path, Integer.parseInt(line)));
+		saveFile();
 	}
-
-	private static final long serialVersionUID = 1L;
-
-	private class OpenedFile implements Serializable {
+	
+	private static void saveFile() {
+		try {
+			FileOutputStream f = new FileOutputStream(new File("recent.save"));
+			ObjectOutputStream o = new ObjectOutputStream(f);
+			o.writeObject(recentFilesList);
+			o.close();
+			f.close();
+		} catch (Exception e) {
+			System.err.println("An error occurred saving the recent file. Please restart and try again.");
+			e.printStackTrace();
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static List<OpenedFile> readFile() {
+		if(recentFilesList == null){
+			FileInputStream fi = null;
+			ObjectInputStream oi = null;
+			try {
+				fi = new FileInputStream(new File("recent.save"));
+				oi = new ObjectInputStream(fi);
+				recentFilesList = (List<OpenedFile>) oi.readObject();
+			} catch (Exception e) {
+				recentFilesList = new LinkedList<OpenedFile>();
+			}
+			if (oi != null) {
+				try {
+					oi.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			if (fi != null) {
+				try {
+					fi.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return recentFilesList;
+	}
+	
+	public static class OpenedFile implements Serializable {
 
 		private static final long serialVersionUID = 1L;
 		private String path = null;
 		private int line = 0;
+		private String nickname = null;
 
+		public OpenedFile(String path, int line, String nickname) {
+			this.path = path;
+			this.line = line;
+			this.nickname = nickname;
+		}
+		
 		public OpenedFile(String path, int line) {
 			this.path = path;
 			this.line = line;
 		}
 
-		public String getPath() {
-			return path;
+		public String getName() {
+			return (nickname!=null)?nickname:path;
 		}
 
 		public int getLine() {
@@ -66,60 +108,15 @@ public class RecentFiles implements Serializable {
 				return false;
 			return true;
 		}
-	}
-
-	private LinkedList<OpenedFile> list = null;
-
-	public void saveFile(String line, String path) {
-		if (list == null)
-			list = new LinkedList<OpenedFile>();
-		OpenedFile recentFile = new OpenedFile(path, Integer.parseInt(line));
-		list.remove(recentFile);
-		list.add(0, recentFile);
-		saveRecent(this);
-	}
-
-	public static RecentFiles readRecent() {
-		RecentFiles recf = null;
-		FileInputStream fi = null;
-		ObjectInputStream oi = null;
-		try {
-			fi = new FileInputStream(new File("recent.save"));
-			oi = new ObjectInputStream(fi);
-			recf = (RecentFiles) oi.readObject();
-		} catch (ObjectStreamException e) {
-			recf = new RecentFiles();
-		} catch (Exception e) {
-		}
-		if (oi != null) {
-			try {
-				oi.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		if (fi != null) {
-			try {
-				fi.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+		
+		public String toString(){
+			return this.line+" : "+((this.nickname==null)?this.path:nickname);
 		}
 
-		return recf;
-	}
-
-	public static void saveRecent(RecentFiles recentFiles) {
-		try {
-			FileOutputStream f = new FileOutputStream(new File("recent.save"));
-			ObjectOutputStream o = new ObjectOutputStream(f);
-			o.writeObject(recentFiles);
-			o.close();
-			f.close();
-		} catch (Exception e) {
-			System.err.println("An error occurred saving the recent file. Please restart and try again.");
-			e.printStackTrace();
+		public String getPath() {
+			return this.path;
 		}
 	}
 
 }
+
