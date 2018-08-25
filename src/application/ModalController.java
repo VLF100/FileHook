@@ -10,8 +10,10 @@ public class ModalController {
     	String nickname = Main.getNicknameModalField();
     	if(nickname==null || nickname.isEmpty() || nickname.length()>25)
     		Main.nicknameModalShowError();
-    	else
-    		System.out.println(nickname);
+    	else{
+    		HookController.saveClickWithNick(nickname);
+    		Main.closeNicknameModal();
+    	}
     }
 
     @FXML

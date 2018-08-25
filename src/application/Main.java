@@ -2,10 +2,11 @@ package application;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 import application.RecentFiles.OpenedFile;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -43,6 +44,8 @@ public class Main extends Application {
 	//Parsing for scripts with ruby text
 	public static boolean blueSkyMode = false;
 	
+	private static boolean sideMenuOpen = false;
+	
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -62,6 +65,20 @@ public class Main extends Application {
 				if (!numberField.isFocused() && event.getCode() == KeyCode.ENTER)
 					hook.hookClick(null);
 			});
+			
+			//Code to listen to mouse input for focus control
+			scene.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+				if(sideMenuOpen){
+					Node sidePaneRecent = Main.root.lookup("#paneRecent");
+					Node sidePaneDelta = Main.root.lookup("#paneDelta");
+					if (!inHierarchy(event.getPickResult().getIntersectedNode(), sidePaneRecent)) {
+						closeRecent();
+			        }
+					if (!inHierarchy(event.getPickResult().getIntersectedNode(), sidePaneDelta)) {
+						closeDelta();
+			        }
+				}
+			});
 
 			primaryStage.setScene(scene);
 			primaryStage.setAlwaysOnTop(true);
@@ -77,6 +94,19 @@ public class Main extends Application {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private static boolean inHierarchy(Node node, Node potentialHierarchyElement) {
+	    if (potentialHierarchyElement == null) {
+	        return true;
+	    }
+	    while (node != null) {
+	        if (node == potentialHierarchyElement) {
+	            return true;
+	        }
+	        node = node.getParent();
+	    }
+	    return false;
 	}
 
 	public static void main(String[] args) {
@@ -138,13 +168,15 @@ public class Main extends Application {
 	}
 	
 	//Control of the "recent list of files" side menu
-	public static void showRecent(List<OpenedFile> recentFiles) {
+	public static void showRecent() {
 		@SuppressWarnings("unchecked")
 		ListView<OpenedFile> recentList = (ListView<OpenedFile>)Main.root.lookup("#recentList");
 		ListView<OpenedFile> viewList = ((ListView<OpenedFile>) recentList);
 		
-		ObservableList<OpenedFile> wordsList = FXCollections.observableArrayList(RecentFiles.readFile()); 
-		viewList.setItems(wordsList);
+		viewList.getItems().clear();
+		
+		ObservableList<OpenedFile> list = FXCollections.observableArrayList(RecentFiles.readFile()); 
+		viewList.setItems(list);
 		//set action for when item selected with a double click
 		
 		viewList.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -160,20 +192,24 @@ public class Main extends Application {
 		});
 		
 		Node recentPane = Main.root.lookup("#paneRecent");
+		sideMenuOpen = true;
 		recentPane.setVisible(true);
 	}
 	public static void closeRecent() {
 		Node recentPane = Main.root.lookup("#paneRecent");
+		sideMenuOpen = false;
 		recentPane.setVisible(false);
 	}
 
 	//Control of the "delta features" side menu
 	public static void showDelta() {
 		Node recentPane = Main.root.lookup("#paneDelta");
+		sideMenuOpen = true;
 		recentPane.setVisible(true);
 	}
 	public static void closeDelta() {
 		Node recentPane = Main.root.lookup("#paneDelta");
+		sideMenuOpen = false;
 		recentPane.setVisible(false);
 	}
 
@@ -218,6 +254,8 @@ public class Main extends Application {
             nickModal.show();
         });
         
+        
+        
 		nickModal.showAndWait();
 		
 	}
@@ -232,7 +270,6 @@ public class Main extends Application {
 	}
 
 	public static void nicknameModalShowError() {
-		System.out.println("in");
 		Node nickfield = nickModalPane.lookup("#nickField");
 		nickfield.getStyleClass().add("textfieldError");
 		

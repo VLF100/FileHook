@@ -15,13 +15,14 @@ Basic use:
  * PS: For now there is no encoding option for the files, so it is recommended for the files to be in UTF-8 which is the only format supported. Likewise, non-plain text files as well as RTF are not supported neither. 
  
 Features yet to be implemented:
-  * Add nickname to save points
   * Drag and drop function
   * Set icon for the application
   * Nothing more planned for now
   
 Features implemented but not launched:
-  * Application is now always on top of screen when possible.
+  * Added possibility to nickname save points, right click on the save button to access to the menu.
+  * If side menus lose focus, they will close
+  * Application is now always on top of screen by default.
   * Added Enter key functionality to advance line.
   * Added tooltips for some elements
   * Added "Next Script"/Arrow button to go instantly to next file in alphabetical order

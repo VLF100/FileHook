@@ -2,14 +2,15 @@ package application;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.input.DragEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 
 import java.io.File;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.List;
 
 import application.RecentFiles.OpenedFile;
 
@@ -20,7 +21,6 @@ import application.RecentFiles.OpenedFile;
 public class HookController {
 
 	private static FileReader fileReader;
-	private static List<OpenedFile> recentFiles = null;
 
 	public HookController() {}
 
@@ -67,18 +67,26 @@ public class HookController {
 	//Recent button. Shows side menu of recent files.
 	@FXML
 	void recentClick(MouseEvent event) {
-		recentFiles = RecentFiles.readFile();
-		Main.showRecent(recentFiles);
+		Main.showRecent();
 	}
 
 	//Save progress button. Saves current file and line on "recents" file.
 	@FXML
 	void saveClick(MouseEvent event) {
-		if (recentFiles == null)
-			recentFiles = RecentFiles.readFile();
+		 if (event.getButton() == MouseButton.SECONDARY) {
+	            return;
+	       }
 		if (fileReader != null) {
 			String[] nameline = fileReader.getNameLine();
 			RecentFiles.addToList(nameline[0], nameline[1], null);
+		}
+	}
+	
+	//Accept button on nickname modal. Saves current file and line on "recents" file with a custom nickname.
+	static void saveClickWithNick(String nick) {
+		if (fileReader != null) {
+			String[] nameline = fileReader.getNameLine();
+			RecentFiles.addToList(nameline[0], nameline[1], nick);
 		}
 	}
 
@@ -171,7 +179,18 @@ public class HookController {
     
     @FXML
     void saveWithNick(ActionEvent event) {
-    	Main.showNicknameModal();
+    	if(fileReader != null)
+    		Main.showNicknameModal();
+    }
+    
+    @FXML
+    void checkDrag(DragEvent event) {
+    	//System.out.println("something i being dragged");
+    }
+    
+    @FXML
+    void loadDraggedFile(DragEvent event) {
+    	System.out.println("something was being dragged");
     }
 
 }

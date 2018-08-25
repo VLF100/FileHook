@@ -19,7 +19,16 @@ public class RecentFiles {
 	private static List<OpenedFile> recentFilesList = null;
 	
 	public static void addToList(String line, String path, String nickname) {
-		recentFilesList.add(new OpenedFile(path, Integer.parseInt(line)));
+		OpenedFile newOpf = new OpenedFile(path, Integer.parseInt(line), nickname);
+		for (OpenedFile openedFile : recentFilesList) {
+			if(openedFile.equals(newOpf)){
+				recentFilesList.remove(openedFile);
+				recentFilesList.add(0, newOpf);
+				saveFile();
+				return;
+			}
+		}
+		recentFilesList.add(0, new OpenedFile(path, Integer.parseInt(line), nickname));
 		saveFile();
 	}
 	
@@ -78,10 +87,9 @@ public class RecentFiles {
 			this.line = line;
 			this.nickname = nickname;
 		}
-		
-		public OpenedFile(String path, int line) {
-			this.path = path;
-			this.line = line;
+
+		public void setLine(String line) {
+			this.line = Integer.parseInt(line);
 		}
 
 		public String getName() {
@@ -106,11 +114,15 @@ public class RecentFiles {
 					return false;
 			} else if (!path.equals(other.path))
 				return false;
+			if (nickname == null) {
+				if (other.nickname != null)
+					return false;
+			} else if (!nickname.equals(other.nickname))
+				return false;
 			return true;
 		}
-		
 		public String toString(){
-			return this.line+" : "+((this.nickname==null)?this.path:nickname);
+			return this.line+" : "+((this.nickname==null)?this.path:this.nickname);
 		}
 
 		public String getPath() {
