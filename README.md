@@ -16,17 +16,9 @@ Basic use:
  
 Features yet to be implemented:
   * Set icon for the application
+  * Make exe application for windows
   * Nothing more planned for now
   
 Features implemented but not launched:
-  * Added possibility to nickname save points, right click on the save button to access to the menu.
-  * If side menus lose focus, they will close
-  * Application is now always on top of screen by default.
-  * Added Enter key functionality to advance line.
-  * Added tooltips for some elements
-  * Added "Next Script"/Arrow button to go instantly to next file in alphabetical order
-  * Added Delta menu with extra or specific features.
-    * Added Blue Sky Mode for parsing of a cleaner parsing of scripts with ruby text.
-    * Option to disable "always on top" function
   * Nothing more added for now. Check latest release.
 	
