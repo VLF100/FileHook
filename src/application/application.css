@@ -28,7 +28,7 @@
 }
 
 #reloadButton {
-	-fx-background-image: url("application/reloadIcon.png");
+	-fx-background-image: url("img/reloadIcon.png");
 	-fx-background-size: cover;
 	-fx-background-repeat: no-repeat;
 	-fx-background-position: center center;
@@ -60,7 +60,7 @@
 }
 
 #closeRecent {
-	-fx-background-image: url("application/x.png");
+	-fx-background-image: url("img/x.png");
 	-fx-background-size: cover;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center center;
@@ -68,7 +68,7 @@
 }
 
 #closeRecent:hover  {
-	-fx-background-image: url("application/xhover.png");
+	-fx-background-image: url("img/xhover.png");
 	-fx-background-size: cover;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center center;
@@ -76,7 +76,7 @@
 }
 
 #nextScript {
-	-fx-background-image: url("application/arrow.png");
+	-fx-background-image: url("img/arrow.png");
 	-fx-background-size: cover;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center center;
@@ -84,7 +84,7 @@
 }
 
 #nextScript:hover  {
-	-fx-background-image: url("application/arrowhover.png");
+	-fx-background-image: url("img/arrowhover.png");
 	-fx-background-size: cover;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center center;

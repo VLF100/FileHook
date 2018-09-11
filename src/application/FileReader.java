@@ -85,7 +85,7 @@ public class FileReader {
 				.replaceAll("\\[\\%p\\]", "")
 				.replaceAll("\\[color.+?(?=\\])\\]", "")
 				.replaceAll("\\[margin.*\\]", "")
-				.replaceAll("③⑤", "ーー")
+				.replaceAll("③⑤", "--")
 				.replaceAll("\\[\\%e\\]", "")
 				.replaceAll("\\[ruby-base\\]", "")
 				.replaceAll("\\[ruby-text-start\\].*\\[ruby-text-end\\]", "");

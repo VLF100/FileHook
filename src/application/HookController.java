@@ -2,7 +2,6 @@ package application;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.input.DragEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
@@ -181,16 +180,6 @@ public class HookController {
     void saveWithNick(ActionEvent event) {
     	if(fileReader != null)
     		Main.showNicknameModal();
-    }
-    
-    @FXML
-    void checkDrag(DragEvent event) {
-    	//System.out.println("something i being dragged");
-    }
-    
-    @FXML
-    void loadDraggedFile(DragEvent event) {
-    	System.out.println("something was being dragged");
     }
 
 }
