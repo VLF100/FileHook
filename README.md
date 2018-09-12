@@ -15,6 +15,7 @@ Basic use:
  * PS: For now there is no encoding option for the files, so it is recommended for the files to be in UTF-8 which is the only format supported. Likewise, non-plain text files as well as RTF are not supported neither. 
  
 Features yet to be implemented:
+  * Deletion of save points
   * Set icon for the application
   * Make exe application for windows
   * Nothing more planned for now
