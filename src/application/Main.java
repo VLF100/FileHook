@@ -12,18 +12,23 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 
 /**
  * Main class of the application.
@@ -38,11 +43,16 @@ public class Main extends Application {
 	
 	private static Stage nickModal;
 	private static AnchorPane nickModalPane;
+	
+	private static Stage fullTextWindow;
+	private static AnchorPane fullTextWindowPane;
 
 	//Parsing for scripts with ruby text
 	public static boolean blueSkyMode = false;
+	public static boolean fullTextFire = false;
 	
 	private static boolean sideMenuOpen = false;
+	
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -87,6 +97,8 @@ public class Main extends Application {
 			
 			Main.primaryStage = primaryStage;
 			
+			loadFullTextWindow();
+			
 			RecentFiles.readFile();
 
 		} catch (Exception e) {
@@ -121,6 +133,9 @@ public class Main extends Application {
 		Tooltip.install(blueSkyMode, Main.generateStandardTooltip("Parsing for scripts with ruby text.")); 
 		Node alwaysOnTopMode = Main.root.lookup("#alwaysOnTopMode");
 		Tooltip.install(alwaysOnTopMode, Main.generateStandardTooltip("Keep the application on the foreground.")); 
+		Node fullText = Main.root.lookup("#fullTextCheckbox");
+		Tooltip.install(fullText, Main.generateStandardTooltip("Show a side Window with the full current line.")); 
+		
 	}
 	
 	//Function to generate tooltips with the same parameters
@@ -144,6 +159,8 @@ public class Main extends Application {
 		((TextField) numberField).setText(Integer.toString(i));
 		Node lineLabel = Main.root.lookup("#lineLabel");
 		((Label) lineLabel).setText(string);
+		Node fullTextArea = fullTextWindowPane.lookup("#fullTextArea");
+		((TextArea) fullTextArea).setText(string);
 		Node totalLabel = Main.root.lookup("#labelTotal");
 		((Label) totalLabel).setText(i + "/" + totalLines);
 	}
@@ -216,6 +233,7 @@ public class Main extends Application {
 		primaryStage.setAlwaysOnTop(((CheckBox)topFire).isSelected());
 	}
 
+	//Nickname modal
 	public static void showNicknameModal() {
 		if(nickModal == null){
 			nickModal = new Stage();
@@ -257,16 +275,13 @@ public class Main extends Application {
 		nickModal.showAndWait();
 		
 	}
-	
 	public static void closeNicknameModal() {
 		nickModal.close();
 	}
-
 	public static String getNicknameModalField() {
 		Node nickfield = nickModalPane.lookup("#nickField");
 		return ((TextField) nickfield).getText();
 	}
-
 	public static void nicknameModalShowError() {
 		Node nickfield = nickModalPane.lookup("#nickField");
 		nickfield.getStyleClass().add("textfieldError");
@@ -283,4 +298,41 @@ public class Main extends Application {
 		
 	}
 
+	//Full Text Window
+	public static void loadFullTextWindow(){
+		fullTextWindow = new Stage();
+		fullTextWindow.setTitle("Full Text");
+		fullTextWindow.initStyle(StageStyle.UTILITY);
+		FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/application/fulltextwindow.fxml"));
+		fxmlLoader.setController(new ModalController());
+		try {
+			fullTextWindowPane = (AnchorPane) fxmlLoader.load();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		Scene scene = new Scene(fullTextWindowPane);
+		scene.getStylesheets().add(Main.class.getResource("application.css").toExternalForm());
+
+		fullTextWindow.setScene(scene);
+		fullTextWindow.setResizable(false);
+		fullTextWindow.initOwner(primaryStage);
+		fullTextWindow.setOnShown(ev -> {
+        	fullTextWindow.setX(primaryStage.getX() + 600 + 30);
+        	fullTextWindow.setY(primaryStage.getY());
+        	fullTextWindow.show();
+        });
+		
+		Node fullTextArea = fullTextWindowPane.lookup("#fullTextArea");
+		((TextArea) fullTextArea).setWrapText(true);
+		((TextArea) fullTextArea).setEditable(false);
+		Node lineLabel = Main.root.lookup("#lineLabel");
+		((TextArea) fullTextArea).setFont(((Label) lineLabel).getFont());
+		
+	}
+	public static void showFullTextWindow(){
+		fullTextWindow.showAndWait();
+	}
+	public static void closeFullTextWindow(){
+		fullTextWindow.close();
+	}
 }

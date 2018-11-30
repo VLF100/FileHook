@@ -80,7 +80,7 @@ public class HookController {
 			RecentFiles.addToList(nameline[0], nameline[1], null);
 		}
 	}
-	
+
 	//Accept button on nickname modal. Saves current file and line on "recents" file with a custom nickname.
 	static void saveClickWithNick(String nick) {
 		if (fileReader != null) {
@@ -94,13 +94,25 @@ public class HookController {
 	void closeClick(MouseEvent event) {
 		Main.closeRecent();
 	}
-	
-	
+
+
 	//Blue Sky mode checkbox. Parsing for scripts with ruby text.
 	@FXML
 	void blueSkyFire(MouseEvent event) {
 		Main.blueSkyMode = !Main.blueSkyMode;
 		/*System.out.println("Blue Sky checkbox fired: " + Main.blueSkyMode);*/
+	}
+
+	//Full Text Window Button. Show a window with the full line copied onto the clipboard.
+	@FXML
+	void fullTextFire(MouseEvent event) {
+		Main.fullTextFire = !Main.fullTextFire;
+		if(Main.fullTextFire) {
+			Main.showFullTextWindow();
+		} else {
+			Main.closeFullTextWindow();
+		}
+
 	}
 
 	//Function to open a file from the recent files side menu.
@@ -127,7 +139,7 @@ public class HookController {
     void closeDelta(MouseEvent event) {
     	Main.closeDelta();
     }
-    
+
     //Function to enable/disable the "Always on top" functionality with the checkbox.
     @FXML
     void topFire(MouseEvent event) {
@@ -139,29 +151,29 @@ public class HookController {
     void nextClick(MouseEvent event) {
     	if(fileReader == null)
     		return;
-    	
+
     	String name = fileReader.getName();
     	String path = fileReader.getPath();
-    	
+
     	if(path == null)
     		return;
-    	
+
     	File folder = new File(path);
     	File[] listOfFiles = folder.listFiles();
-    	
+
     	class CompFiles implements Comparator<File> {
 
 			@Override
 			public int compare(File o1, File o2) {
 				return o1.getName().compareTo(o2.getName());
 			}
-    		
+
     	}
-    	
+
     	Comparator<File> compFiles = new CompFiles();
-    	
+
     	Arrays.sort(listOfFiles,compFiles);
-    	
+
     	for (int i = 0; i < listOfFiles.length; i++) {
     		  if (listOfFiles[i].isFile()) {
     			if(listOfFiles[i].getName().equals(name))
@@ -175,7 +187,7 @@ public class HookController {
     		  }
     	}
     }
-    
+
     @FXML
     void saveWithNick(ActionEvent event) {
     	if(fileReader != null)
