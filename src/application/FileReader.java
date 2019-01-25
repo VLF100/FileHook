@@ -60,9 +60,12 @@ public class FileReader {
 		String strLine;
 		try {
 			if (br != null) {
-				strLine = br.readLine();
+				strLine = br.readLine().trim();
+				while(strLine.isEmpty())
+				{
+					strLine = br.readLine().trim();
+				}
 				if (strLine != null) {
-					strLine = strLine.replaceAll("^\\s+", "");
 					if(Main.blueSkyMode) //Parsing for scripts with ruby text
 						strLine = parseBlueSky(strLine);
 					Main.setLine(++this.lineNumber, strLine, totalLines);
